@@ -10,6 +10,6 @@ public class DesktopLauncher {
 		config.title = "Day at the Office";
 		config.width = DayAtTheOffice.WIDTH;
 		config.height = DayAtTheOffice.HEIGHT;
-		new LwjglApplication(new DayAtTheOffice(), config);
+		new LwjglApplication(DayAtTheOffice.getInstance(), config);
 	}
 }

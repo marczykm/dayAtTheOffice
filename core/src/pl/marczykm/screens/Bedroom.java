@@ -16,9 +16,11 @@ import java.util.ArrayList;
  * Created by mmarczyk on 2015-10-12.
  */
 public class Bedroom extends CoreScreen {
+    private static Bedroom instance;
+
     private Vector3 touchPoint;
 
-    private Texture background;
+    private static Texture background;
 
     private JohnDoe johnDoe;
     private Door door;
@@ -29,9 +31,9 @@ public class Bedroom extends CoreScreen {
 
     private int floorGap = 10;
 
-    private float time = 0;
+    private static float time = 0;
 
-    public Bedroom(final DayAtTheOffice game) {
+    private Bedroom(final DayAtTheOffice game) {
         super();
         this.game = game;
 
@@ -55,6 +57,14 @@ public class Bedroom extends CoreScreen {
         toUpdateAndRender.add(johnDoe);
 
         touchPoint = new Vector3();
+    }
+
+    public static Bedroom getInstance() {
+        if (instance == null)
+            instance = new Bedroom(DayAtTheOffice.getInstance());
+        time = 0;
+        background = new Texture(Gdx.files.internal("bedroom_background.png"));
+        return instance;
     }
 
     @Override
