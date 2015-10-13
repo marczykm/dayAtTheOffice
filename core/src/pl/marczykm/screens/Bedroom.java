@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector3;
 import pl.marczykm.DayAtTheOffice;
 import pl.marczykm.HitHelper;
@@ -24,6 +25,7 @@ public class Bedroom extends CoreScreen {
     private Desk desk;
     private Lamp lamp;
     private Bed bed;
+    private Clock clock;
 
     private int floorGap = 10;
 
@@ -36,16 +38,18 @@ public class Bedroom extends CoreScreen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, game.WIDTH, game.HEIGHT);
 
-        background = new Texture(Gdx.files.internal("bedroom.png"));
+        background = new Texture(Gdx.files.internal("bedroom_background.png"));
 
         door = new Door(game, 400, floorGap+20);
         toUpdateAndRender.add(door);
-        desk = new Desk(game, 100, floorGap);
+        desk = new Desk(game, 50, floorGap);
         toUpdateAndRender.add(desk);
         lamp = new Lamp(game, game.WIDTH/2-8*game.MULTIPLY, game.HEIGHT-16*game.MULTIPLY);
         toUpdateAndRender.add(lamp);
-        bed = new Bed(game, 1000, floorGap);
+        bed = new Bed(game, 880, floorGap);
         toUpdateAndRender.add(bed);
+        clock = new Clock(game, 900, 350);
+        toUpdateAndRender.add(clock);
 
         johnDoe = new JohnDoe(game, game.WIDTH-100, floorGap);
         toUpdateAndRender.add(johnDoe);

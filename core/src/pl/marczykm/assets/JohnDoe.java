@@ -27,7 +27,7 @@ public class JohnDoe extends Asset implements ApplicationListener {
     private float stateTime;
 
     public JohnDoe(DayAtTheOffice game, float x, float y){
-        super(game, x, y, "JohnDoe.png");
+        super(game, x, y, "john_doe.png");
         this.game = game;
 
         targetPosition = x;
@@ -38,8 +38,7 @@ public class JohnDoe extends Asset implements ApplicationListener {
 
     @Override
     public void create() {
-        texture = new Texture(Gdx.files.internal("JohnDoe.png"));
-        walkSheet = new Texture(Gdx.files.internal("JohnDoeWalk.png"));
+        walkSheet = new Texture(Gdx.files.internal("john_doe_walk.png"));
         walkFrames = new TextureRegion[FRAME_COLS];
         TextureRegion[][] temp = TextureRegion.split(walkSheet, walkSheet.getWidth()/FRAME_COLS, walkSheet.getHeight());
         int index = 0;
