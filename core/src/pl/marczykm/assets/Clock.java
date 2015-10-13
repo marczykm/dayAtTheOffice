@@ -13,7 +13,7 @@ import java.util.Date;
 public class Clock extends Asset {
 
     private BitmapFont time;
-    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+//    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
     public Clock(DayAtTheOffice game, float x, float y) {
         super(game, x, y, "clock.png");
@@ -32,6 +32,10 @@ public class Clock extends Asset {
     @Override
     public void render() {
         super.render();
-        time.draw(game.batch, sdf.format(new Date()), pos.x+25, pos.y+52);
+        Date now = new Date();
+        time.draw(game.batch,
+                (now.getHours()<10 ? "0"+now.getHours():now.getHours())+":"
+                        +(now.getMinutes()<10 ? "0"+now.getMinutes() : now.getMinutes()),
+                pos.x+25, pos.y+52);
     }
 }

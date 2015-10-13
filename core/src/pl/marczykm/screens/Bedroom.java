@@ -51,7 +51,7 @@ public class Bedroom extends CoreScreen {
         clock = new Clock(game, 900, 350);
         toUpdateAndRender.add(clock);
 
-        johnDoe = new JohnDoe(game, game.WIDTH-100, floorGap);
+        johnDoe = new JohnDoe(game, game.WIDTH-200, floorGap);
         toUpdateAndRender.add(johnDoe);
 
         touchPoint = new Vector3();

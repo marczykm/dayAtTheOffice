@@ -1,6 +1,7 @@
 package pl.marczykm.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -36,17 +37,17 @@ public class MainMenuScreen implements Screen {
 
         game.batch.begin();
         game.font.draw(game.batch, "Welcome to Day at the Office", 100, 150);
-        game.font.draw(game.batch, "Click anywhere to start", 100, 100);
+        game.font.draw(game.batch, "Click anywhere or press spacebar to start", 100, 100);
         game.batch.end();
 
         time += delta;
 
-        if(time > 1) {
-            if (Gdx.input.isTouched()) {
+//        if(time > 1) {
+            if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Keys.SPACE)) {
                 game.setScreen(new Bedroom(game));
                 dispose();
             }
-        }
+//        }
 
     }
 

@@ -2,6 +2,7 @@ package pl.marczykm.assets;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -13,7 +14,6 @@ import pl.marczykm.DayAtTheOffice;
 public class JohnDoe extends Asset implements ApplicationListener {
 
     private State currentState;
-    private Direction lastWalkDirection;
 
     private float targetPosition;
     private float time = 0;
@@ -30,7 +30,7 @@ public class JohnDoe extends Asset implements ApplicationListener {
         super(game, x, y, "john_doe.png");
         this.game = game;
 
-        targetPosition = x;
+        targetPosition = x+60;
 
         currentState = State.STAND;
         create();
@@ -82,9 +82,6 @@ public class JohnDoe extends Asset implements ApplicationListener {
                 return Direction.RIGHT;
             }
         }
-        if (currentState == State.STAND) {
-            return lastWalkDirection;
-        }
         return Direction.RIGHT;
     }
 
@@ -115,18 +112,13 @@ public class JohnDoe extends Asset implements ApplicationListener {
 
         if (pos.x > targetPosition - bounds.width/2)
             pos.x -= 10;
-
     }
 
     private void checkState() {
         if (pos.x < targetPosition - bounds.width/2) {
-            if (currentState == State.WALK)
-                lastWalkDirection = Direction.LEFT;
             currentState = State.WALK;
         }
         if (pos.x > targetPosition - bounds.width/2) {
-            if (currentState == State.WALK)
-                lastWalkDirection = Direction.RIGHT;
             currentState = State.WALK;
         }
         if (pos.x - 10 < targetPosition - bounds.width/2 && pos.x + 10 > targetPosition - bounds.width/2) {
@@ -139,6 +131,23 @@ public class JohnDoe extends Asset implements ApplicationListener {
         if (time > 1) {
             if (Gdx.input.isTouched()) {
                 targetPosition = Gdx.input.getX();
+            }
+            if (Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)){
+                targetPosition -= 10;
+                currentState = State.WALK;
+            }
+            if (Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT)){
+                targetPosition += 10;
+                currentState = State.WALK;
+            }
+
+            if (targetPosition > DayAtTheOffice.WIDTH - bounds.getWidth()/2) {
+                targetPosition = DayAtTheOffice.WIDTH - bounds.getWidth()/2;
+                currentState = State.STAND;
+            }
+            if (targetPosition < 0 + bounds.getWidth()/2) {
+                targetPosition = 0 + bounds.getWidth()/2;
+                currentState = State.STAND;
             }
         }
     }
