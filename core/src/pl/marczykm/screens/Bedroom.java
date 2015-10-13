@@ -70,8 +70,6 @@ public class Bedroom extends CoreScreen {
 
 
     private boolean hit(){
-        System.out.println(touchPoint.x + "x" + touchPoint.y);
-        System.out.println(door.bounds.x + " " + door.bounds.y + " " + door.bounds.width + " " + door.bounds.height);
         return  door.bounds.x <= touchPoint.x &&
                 door.bounds.x + door.bounds.width >= touchPoint.x &&
                 door.bounds.y <= touchPoint.y &&
