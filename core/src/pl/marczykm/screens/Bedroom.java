@@ -6,26 +6,31 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import pl.marczykm.DayAtTheOffice;
+import pl.marczykm.HitHelper;
+import pl.marczykm.assets.Desk;
 import pl.marczykm.assets.JohnDoe;
 import pl.marczykm.assets.Door;
+
+import java.util.ArrayList;
 
 /**
  * Created by mmarczyk on 2015-10-12.
  */
 public class Bedroom extends CoreScreen {
-
-    final DayAtTheOffice game;
-    OrthographicCamera camera;
-    Texture background;
-    JohnDoe johnDoe;
-    Door door;
     private Vector3 touchPoint;
+
+    private Texture background;
+
+    private JohnDoe johnDoe;
+    private Door door;
+    private Desk desk;
 
     private int floorGap = 10;
 
     float time = 0;
 
     public Bedroom(final DayAtTheOffice game) {
+        super();
         this.game = game;
 
         camera = new OrthographicCamera();
@@ -33,9 +38,12 @@ public class Bedroom extends CoreScreen {
 
         background = new Texture(Gdx.files.internal("bedroom.png"));
 
-        johnDoe = new JohnDoe(game, game.WIDTH-100, floorGap);
-
         door = new Door(game, 400, floorGap+20);
+        toUpdateAndRender.add(door);
+        desk = new Desk(game, 100, floorGap);
+        toUpdateAndRender.add(desk);
+        johnDoe = new JohnDoe(game, game.WIDTH-100, floorGap);
+        toUpdateAndRender.add(johnDoe);
 
         touchPoint = new Vector3();
     }
@@ -46,13 +54,16 @@ public class Bedroom extends CoreScreen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
-        door.update();
-        johnDoe.update(delta);
+
+        for (int i = 0; i < toUpdateAndRender.size(); i++)
+            toUpdateAndRender.get(i).update(delta);
 
         game.batch.begin();
-        game.batch.draw(background, 0, 0, background.getWidth()*game.MULTIPLY, background.getHeight()*game.MULTIPLY);
-        door.render();
-        johnDoe.render();
+        game.batch.draw(background, 0, 0, background.getWidth() * game.MULTIPLY, background.getHeight() * game.MULTIPLY);
+
+        for (int i = 0; i < toUpdateAndRender.size(); i++)
+            toUpdateAndRender.get(i).render();
+
         game.batch.end();
 
         time += delta;
@@ -60,20 +71,11 @@ public class Bedroom extends CoreScreen {
         camera.unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
 
         if (time > 1) {
-            if (Gdx.input.isTouched() && hit()) {
+            if (Gdx.input.isTouched() && HitHelper.hit(door, touchPoint)) {
                 game.setScreen(new MainMenuScreen(game));
                 dispose();
             }
         }
-    }
-
-
-
-    private boolean hit(){
-        return  door.bounds.x <= touchPoint.x &&
-                door.bounds.x + door.bounds.width >= touchPoint.x &&
-                door.bounds.y <= touchPoint.y &&
-                door.bounds.y + door.bounds.height >= touchPoint.y;
     }
 
     @Override

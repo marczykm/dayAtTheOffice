@@ -9,12 +9,12 @@ import pl.marczykm.DayAtTheOffice;
 /**
  * Created by mmarczyk on 2015-10-12.
  */
-public class Door {
+public class Door implements Asset {
     final DayAtTheOffice game;
 
-    Vector2 pos = new Vector2();
-    public Rectangle bounds = new Rectangle();
-    Texture texture;
+    private Vector2 pos = new Vector2();
+    private Rectangle bounds = new Rectangle();
+    private Texture texture;
 
     public Door(DayAtTheOffice game, float x, float y){
         this.game = game;
@@ -30,12 +30,17 @@ public class Door {
         texture = new Texture(Gdx.files.internal("door.png"));
     }
 
-    public void update(){
+    public void update(float delta){
 
     }
 
     public void render(){
         game.batch.draw(texture, pos.x, pos.y, bounds.width, bounds.height);
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return bounds;
     }
 
 }

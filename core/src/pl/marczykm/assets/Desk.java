@@ -9,11 +9,11 @@ import pl.marczykm.DayAtTheOffice;
 /**
  * Created by mmarczyk on 2015-10-13.
  */
-public class Desk {
+public class Desk implements Asset{
     final DayAtTheOffice game;
 
     Vector2 pos = new Vector2();
-    public Rectangle bounds = new Rectangle();
+    private Rectangle bounds = new Rectangle();
     Texture texture;
 
     public Desk(DayAtTheOffice game, float x, float y){
@@ -30,12 +30,17 @@ public class Desk {
         texture = new Texture(Gdx.files.internal("desk.png"));
     }
 
-    public void update(){
+    public void update(float delta){
 
     }
 
     public void render(){
         game.batch.draw(texture, pos.x, pos.y, bounds.width, bounds.height);
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return bounds;
     }
 
 }

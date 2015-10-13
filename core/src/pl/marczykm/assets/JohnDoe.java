@@ -13,12 +13,12 @@ import pl.marczykm.DayAtTheOffice;
 /**
  * Created by mmarczyk on 2015-10-12.
  */
-public class JohnDoe implements ApplicationListener{
+public class JohnDoe implements ApplicationListener, Asset {
     State currentState;
     Direction lastWalkDirection;
 
     Vector2 pos = new Vector2();
-    public Rectangle bounds = new Rectangle();
+    private Rectangle bounds = new Rectangle();
     Texture texture;
     final DayAtTheOffice game;
     float targetPosition;
@@ -85,6 +85,11 @@ public class JohnDoe implements ApplicationListener{
                 break;
         }
         game.batch.draw(currentFrame, flip ? pos.x + bounds.width : pos.x, pos.y, flip ? -bounds.width : bounds.width, bounds.height);
+    }
+
+    @Override
+    public Rectangle getBounds() {
+        return bounds;
     }
 
     private Direction getDirection(){
