@@ -7,10 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import pl.marczykm.DayAtTheOffice;
 import pl.marczykm.HitHelper;
-import pl.marczykm.assets.Desk;
-import pl.marczykm.assets.JohnDoe;
-import pl.marczykm.assets.Door;
-import pl.marczykm.assets.Lamp;
+import pl.marczykm.assets.*;
 
 import java.util.ArrayList;
 
@@ -26,6 +23,7 @@ public class Bedroom extends CoreScreen {
     private Door door;
     private Desk desk;
     private Lamp lamp;
+    private Bed bed;
 
     private int floorGap = 10;
 
@@ -46,6 +44,9 @@ public class Bedroom extends CoreScreen {
         toUpdateAndRender.add(desk);
         lamp = new Lamp(game, game.WIDTH/2-8*game.MULTIPLY, game.HEIGHT-16*game.MULTIPLY);
         toUpdateAndRender.add(lamp);
+        bed = new Bed(game, 1000, floorGap);
+        toUpdateAndRender.add(bed);
+
         johnDoe = new JohnDoe(game, game.WIDTH-100, floorGap);
         toUpdateAndRender.add(johnDoe);
 
