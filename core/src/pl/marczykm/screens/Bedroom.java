@@ -10,6 +10,7 @@ import pl.marczykm.HitHelper;
 import pl.marczykm.assets.Desk;
 import pl.marczykm.assets.JohnDoe;
 import pl.marczykm.assets.Door;
+import pl.marczykm.assets.Lamp;
 
 import java.util.ArrayList;
 
@@ -24,10 +25,11 @@ public class Bedroom extends CoreScreen {
     private JohnDoe johnDoe;
     private Door door;
     private Desk desk;
+    private Lamp lamp;
 
     private int floorGap = 10;
 
-    float time = 0;
+    private float time = 0;
 
     public Bedroom(final DayAtTheOffice game) {
         super();
@@ -42,6 +44,8 @@ public class Bedroom extends CoreScreen {
         toUpdateAndRender.add(door);
         desk = new Desk(game, 100, floorGap);
         toUpdateAndRender.add(desk);
+        lamp = new Lamp(game, game.WIDTH/2-8*game.MULTIPLY, game.HEIGHT-16*game.MULTIPLY);
+        toUpdateAndRender.add(lamp);
         johnDoe = new JohnDoe(game, game.WIDTH-100, floorGap);
         toUpdateAndRender.add(johnDoe);
 

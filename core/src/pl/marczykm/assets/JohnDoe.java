@@ -14,23 +14,23 @@ import pl.marczykm.DayAtTheOffice;
  * Created by mmarczyk on 2015-10-12.
  */
 public class JohnDoe implements ApplicationListener, Asset {
-    State currentState;
-    Direction lastWalkDirection;
+    private State currentState;
+    private Direction lastWalkDirection;
 
-    Vector2 pos = new Vector2();
+    private Vector2 pos = new Vector2();
     private Rectangle bounds = new Rectangle();
-    Texture texture;
-    final DayAtTheOffice game;
-    float targetPosition;
-    float time = 0;
+    private Texture texture;
+    final private DayAtTheOffice game;
+    private float targetPosition;
+    private float time = 0;
 
     private static final int FRAME_COLS = 4;
-    Animation walkAnimation;
-    Texture walkSheet;
-    TextureRegion[] walkFrames;
-    TextureRegion currentFrame;
+    private Animation walkAnimation;
+    private Texture walkSheet;
+    private TextureRegion[] walkFrames;
+    private TextureRegion currentFrame;
 
-    float stateTime;
+    private float stateTime;
 
     public JohnDoe(final DayAtTheOffice game, float x, float y){
         this.game = game;
