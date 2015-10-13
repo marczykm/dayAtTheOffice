@@ -4,13 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector3;
 import pl.marczykm.DayAtTheOffice;
 import pl.marczykm.HitHelper;
 import pl.marczykm.assets.*;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 /**
  * Created by mmarczyk on 2015-10-12.
@@ -33,7 +32,7 @@ public class Bedroom extends CoreScreen {
 
     private static float time = 0;
 
-    private Bedroom(final DayAtTheOffice game) {
+    public Bedroom(final DayAtTheOffice game) {
         super();
         this.game = game;
 
@@ -48,7 +47,9 @@ public class Bedroom extends CoreScreen {
         toUpdateAndRender.add(desk);
         lamp = new Lamp(game, game.WIDTH/2-8*game.MULTIPLY, game.HEIGHT-16*game.MULTIPLY);
         toUpdateAndRender.add(lamp);
-        bed = new Bed(game, 880, floorGap);
+        bed = (Bed) game.load("bed");
+        if (bed == null)
+            bed = new Bed(game, 880, floorGap);
         toUpdateAndRender.add(bed);
         clock = new Clock(game, 900, 350);
         toUpdateAndRender.add(clock);
@@ -59,13 +60,13 @@ public class Bedroom extends CoreScreen {
         touchPoint = new Vector3();
     }
 
-    public static Bedroom getInstance() {
-        if (instance == null)
-            instance = new Bedroom(DayAtTheOffice.getInstance());
-        time = 0;
-        background = new Texture(Gdx.files.internal("bedroom_background.png"));
-        return instance;
-    }
+//    public static Bedroom getInstance() {
+//        if (instance == null)
+//            instance = new Bedroom(DayAtTheOffice.getInstance());
+//        time = 0;
+//        background = new Texture(Gdx.files.internal("bedroom_background.png"));
+//        return instance;
+//    }
 
     @Override
     public void render(float delta) {
@@ -100,17 +101,14 @@ public class Bedroom extends CoreScreen {
                 dispose();
             }
             if (Gdx.input.isTouched() && HitHelper.hit(bed, touchPoint)){
-                showMessage();
+                bed.make();
             }
         }
     }
 
-    public void showMessage(){
-        bed.make();
-    }
-
     @Override
     public void dispose() {
+        game.save("bed", bed);
         background.dispose();
     }
 }

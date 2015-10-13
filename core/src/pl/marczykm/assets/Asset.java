@@ -6,13 +6,14 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import pl.marczykm.DayAtTheOffice;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by mmarczyk on 2015-10-13.
  */
-public abstract class Asset {
+public abstract class Asset implements Serializable{
     DayAtTheOffice game;
     Vector2 pos = new Vector2();
     Rectangle bounds = new Rectangle();
