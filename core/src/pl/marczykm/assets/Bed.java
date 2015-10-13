@@ -13,6 +13,9 @@ public class Bed extends Asset {
 
     @Override
     public void update(float delta) {
+    }
 
+    public void make() {
+        setTexture("bed_made.png");
     }
 }

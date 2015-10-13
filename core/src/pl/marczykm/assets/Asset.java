@@ -6,6 +6,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import pl.marczykm.DayAtTheOffice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mmarczyk on 2015-10-13.
  */
@@ -14,6 +17,8 @@ public abstract class Asset {
     Vector2 pos = new Vector2();
     Rectangle bounds = new Rectangle();
     Texture texture;
+    List<String> messages;
+    boolean render = true;
 
     public Asset(DayAtTheOffice game, float x, float y, String textureName) {
         this.game = game;
@@ -26,6 +31,7 @@ public abstract class Asset {
         bounds.height = texture.getHeight()*game.MULTIPLY;
         bounds.x = pos.x;
         bounds.y = pos.y;
+        messages = new ArrayList<String>();
     }
 
     public abstract void update(float delta);
@@ -36,4 +42,20 @@ public abstract class Asset {
     public Rectangle getBounds(){
         return bounds;
     };
+
+    public List<String> getMessages(){
+        return messages;
+    }
+
+    public boolean isRender() {
+        return render;
+    }
+
+    public void setRender(boolean render) {
+        this.render = render;
+    }
+
+    public void setTexture(String textureName) {
+        this.texture = new Texture(Gdx.files.internal(textureName));
+    }
 }

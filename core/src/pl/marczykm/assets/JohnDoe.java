@@ -129,9 +129,9 @@ public class JohnDoe extends Asset implements ApplicationListener {
     private void processKeys(float deltaTime) {
         time += deltaTime;
         if (time > 1) {
-            if (Gdx.input.isTouched()) {
-                targetPosition = Gdx.input.getX();
-            }
+//            if (Gdx.input.isTouched()) {
+//                targetPosition = Gdx.input.getX();
+//            }
             if (Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT)){
                 targetPosition -= 10;
                 currentState = State.WALK;

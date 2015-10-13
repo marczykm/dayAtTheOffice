@@ -64,14 +64,19 @@ public class Bedroom extends CoreScreen {
 
         camera.update();
 
-        for (int i = 0; i < toUpdateAndRender.size(); i++)
-            toUpdateAndRender.get(i).update(delta);
+        for (int i = 0; i < toUpdateAndRender.size(); i++) {
+            if (toUpdateAndRender.get(i).isRender())
+                toUpdateAndRender.get(i).update(delta);
+        }
 
         game.batch.begin();
-        game.batch.draw(background, 0, 0, background.getWidth() * game.MULTIPLY, background.getHeight() * game.MULTIPLY);
+        game.batch.draw(background, 0, 0,
+                background.getWidth() * game.MULTIPLY, background.getHeight() * game.MULTIPLY);
 
-        for (int i = 0; i < toUpdateAndRender.size(); i++)
-            toUpdateAndRender.get(i).render();
+        for (int i = 0; i < toUpdateAndRender.size(); i++) {
+            if (toUpdateAndRender.get(i).isRender())
+                toUpdateAndRender.get(i).render();
+        }
 
         game.batch.end();
 
@@ -84,7 +89,14 @@ public class Bedroom extends CoreScreen {
                 game.setScreen(new MainMenuScreen(game));
                 dispose();
             }
+            if (Gdx.input.isTouched() && HitHelper.hit(bed, touchPoint)){
+                showMessage();
+            }
         }
+    }
+
+    public void showMessage(){
+        bed.make();
     }
 
     @Override
