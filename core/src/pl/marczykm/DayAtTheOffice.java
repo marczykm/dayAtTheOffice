@@ -7,6 +7,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import pl.marczykm.screens.MainMenuScreen;
 
 public class DayAtTheOffice extends Game {
+    public static final int WIDTH = 1280;
+    public static final int HEIGHT = 640;
+    public static final int MULTIPLY = 8;
+
 	public SpriteBatch batch;
 	Texture img;
 	public BitmapFont font;

@@ -1,6 +1,5 @@
 package pl.marczykm.screens;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,7 +21,7 @@ public class MainMenuScreen implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1024, 768);
+        camera.setToOrtho(false, game.WIDTH, game.HEIGHT);
     }
 
     @Override

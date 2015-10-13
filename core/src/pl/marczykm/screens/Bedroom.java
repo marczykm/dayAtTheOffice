@@ -1,13 +1,12 @@
 package pl.marczykm.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import pl.marczykm.DayAtTheOffice;
-import pl.marczykm.JohnDoe;
+import pl.marczykm.assets.JohnDoe;
 import pl.marczykm.assets.Door;
 
 /**
@@ -22,19 +21,21 @@ public class Bedroom extends CoreScreen {
     Door door;
     private Vector3 touchPoint;
 
+    private int floorGap = 10;
+
     float time = 0;
 
     public Bedroom(final DayAtTheOffice game) {
         this.game = game;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 1024, 768);
+        camera.setToOrtho(false, game.WIDTH, game.HEIGHT);
 
         background = new Texture(Gdx.files.internal("bedroom.png"));
 
-        johnDoe = new JohnDoe(game, 1024-100, 150);
+        johnDoe = new JohnDoe(game, game.WIDTH-100, floorGap);
 
-        door = new Door(game, 400, 170);
+        door = new Door(game, 400, floorGap+20);
 
         touchPoint = new Vector3();
     }
@@ -49,7 +50,7 @@ public class Bedroom extends CoreScreen {
         johnDoe.update(delta);
 
         game.batch.begin();
-        game.batch.draw(background, 0, 0, 1024, 768);
+        game.batch.draw(background, 0, 0, background.getWidth()*game.MULTIPLY, background.getHeight()*game.MULTIPLY);
         door.render();
         johnDoe.render();
         game.batch.end();

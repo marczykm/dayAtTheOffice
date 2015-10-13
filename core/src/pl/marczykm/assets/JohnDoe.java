@@ -1,11 +1,10 @@
-package pl.marczykm;
+package pl.marczykm.assets;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import pl.marczykm.DayAtTheOffice;
 
 /**
  * Created by mmarczyk on 2015-10-12.
@@ -24,8 +23,8 @@ public class JohnDoe {
         pos.x = x;
         pos.y = y;
 
-        bounds.width = 2;
-        bounds.height = 4;
+        bounds.width = 16*game.MULTIPLY;
+        bounds.height = 32*game.MULTIPLY;
         bounds.x = pos.x;
         bounds.y = pos.y;
 
@@ -35,7 +34,7 @@ public class JohnDoe {
     }
 
     public void render(){
-        game.batch.draw(texture, pos.x, pos.y);
+        game.batch.draw(texture, pos.x, pos.y, bounds.width, bounds.height);
     }
 
     public void update(float deltaTime) {
@@ -45,10 +44,10 @@ public class JohnDoe {
 
     private void moveToTarget(float deltaTime){
 
-            if (pos.x < targetPosition) {
+            if (pos.x < targetPosition - bounds.width/2) {
                 pos.x += 10;
             }
-            if (pos.x > targetPosition) {
+            if (pos.x > targetPosition - bounds.width/2) {
                 pos.x -= 10;
             }
 

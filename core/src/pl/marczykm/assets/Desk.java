@@ -7,27 +7,27 @@ import com.badlogic.gdx.math.Vector2;
 import pl.marczykm.DayAtTheOffice;
 
 /**
- * Created by mmarczyk on 2015-10-12.
+ * Created by mmarczyk on 2015-10-13.
  */
-public class Door {
+public class Desk {
     final DayAtTheOffice game;
 
     Vector2 pos = new Vector2();
     public Rectangle bounds = new Rectangle();
     Texture texture;
 
-    public Door(DayAtTheOffice game, float x, float y){
+    public Desk(DayAtTheOffice game, float x, float y){
         this.game = game;
 
         pos.x = x;
         pos.y = y;
 
-        bounds.width = 16*game.MULTIPLY;
+        bounds.width = 32*game.MULTIPLY;
         bounds.height = 32*game.MULTIPLY;
         bounds.x = pos.x;
         bounds.y = pos.y;
 
-        texture = new Texture(Gdx.files.internal("door.png"));
+        texture = new Texture(Gdx.files.internal("desk.png"));
     }
 
     public void update(){
