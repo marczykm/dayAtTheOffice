@@ -1,5 +1,7 @@
 package pl.marczykm.assets;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import pl.marczykm.DayAtTheOffice;
 
 /**
@@ -7,8 +9,15 @@ import pl.marczykm.DayAtTheOffice;
  */
 public class Bed extends Asset {
 
+    private Status status;
+
     public Bed(DayAtTheOffice game, float x, float y) {
         super(game, x, y, "bed.png");
+        status = Status.NOT_MADE;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     @Override
@@ -16,6 +25,11 @@ public class Bed extends Asset {
     }
 
     public void make() {
+        status = Status.MADE;
         setTexture("bed_made.png");
+    }
+
+    public enum Status {
+        MADE, NOT_MADE
     }
 }

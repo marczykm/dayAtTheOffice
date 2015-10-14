@@ -15,8 +15,6 @@ import java.io.IOException;
  * Created by mmarczyk on 2015-10-12.
  */
 public class Bedroom extends CoreScreen {
-    private static Bedroom instance;
-
     private Vector3 touchPoint;
 
     private static Texture background;
@@ -47,7 +45,6 @@ public class Bedroom extends CoreScreen {
         toUpdateAndRender.add(desk);
         lamp = new Lamp(game, game.WIDTH/2-8*game.MULTIPLY, game.HEIGHT-16*game.MULTIPLY);
         toUpdateAndRender.add(lamp);
-        bed = (Bed) game.load("bed");
         if (bed == null)
             bed = new Bed(game, 880, floorGap);
         toUpdateAndRender.add(bed);
@@ -58,15 +55,21 @@ public class Bedroom extends CoreScreen {
         toUpdateAndRender.add(johnDoe);
 
         touchPoint = new Vector3();
+        load();
     }
 
-//    public static Bedroom getInstance() {
-//        if (instance == null)
-//            instance = new Bedroom(DayAtTheOffice.getInstance());
-//        time = 0;
-//        background = new Texture(Gdx.files.internal("bedroom_background.png"));
-//        return instance;
-//    }
+    @Override
+    public void save() {
+        game.saveStorage.putString("bed_status", bed.getStatus().toString());
+        game.saveStorage.flush();
+    }
+
+    @Override
+    public void load() {
+        Bed.Status bedStatus = Bed.Status.valueOf(game.saveStorage.getString("bed_status", Bed.Status.NOT_MADE.toString()));
+        if (bedStatus == Bed.Status.MADE)
+            bed.make();
+    }
 
     @Override
     public void render(float delta) {
@@ -108,7 +111,7 @@ public class Bedroom extends CoreScreen {
 
     @Override
     public void dispose() {
-        game.save("bed", bed);
+        save();
         background.dispose();
     }
 }

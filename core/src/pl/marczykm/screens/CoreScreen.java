@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by mmarczyk on 2015-10-12.
  */
-public class CoreScreen implements Screen {
+public abstract class CoreScreen implements Screen {
 
     public DayAtTheOffice game;
     OrthographicCamera camera;
@@ -21,6 +21,10 @@ public class CoreScreen implements Screen {
     public CoreScreen() {
         toUpdateAndRender = new ArrayList<Asset>();
     }
+
+    public abstract void save();
+
+    public abstract void load();
 
     @Override
     public void show() {

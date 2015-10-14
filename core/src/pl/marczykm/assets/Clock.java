@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import pl.marczykm.DayAtTheOffice;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
