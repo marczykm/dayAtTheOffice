@@ -10,6 +10,8 @@ import pl.marczykm.HitHelper;
 import pl.marczykm.assets.*;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by mmarczyk on 2015-10-12.
@@ -29,6 +31,8 @@ public class Bedroom extends CoreScreen {
     private int floorGap = 10;
 
     private static float time = 0;
+
+    private final String BED_STATUS_SAVE_NAME = this.getClass().getSimpleName()+Bed.class.getSimpleName()+Bed.Status.class.getSimpleName();
 
     public Bedroom(final DayAtTheOffice game) {
         super();
@@ -60,13 +64,13 @@ public class Bedroom extends CoreScreen {
 
     @Override
     public void save() {
-        game.saveStorage.putString("bed_status", bed.getStatus().toString());
+        game.saveStorage.putString(BED_STATUS_SAVE_NAME, bed.getStatus().name());
         game.saveStorage.flush();
     }
 
     @Override
     public void load() {
-        Bed.Status bedStatus = Bed.Status.valueOf(game.saveStorage.getString("bed_status", Bed.Status.NOT_MADE.toString()));
+        Bed.Status bedStatus = Bed.Status.valueOf(game.saveStorage.getString(BED_STATUS_SAVE_NAME, Bed.Status.NOT_MADE.toString()));
         if (bedStatus == Bed.Status.MADE)
             bed.make();
     }

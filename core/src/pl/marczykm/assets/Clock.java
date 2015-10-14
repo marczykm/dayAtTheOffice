@@ -12,7 +12,6 @@ import java.util.Date;
 public class Clock extends Asset {
 
     private BitmapFont time;
-//    private SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
     public Clock(DayAtTheOffice game, float x, float y) {
         super(game, x, y, "clock.png");
